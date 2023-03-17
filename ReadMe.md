@@ -10,4 +10,6 @@ Loss function is defined as 'Least Squares': $$L(\theta) = \sum_{i=0}^{d-1} (h_0
 
 Implemented method for convex, BGD and SGD parameter optimized research
 
+Run training.py to test theta param research and watch for the graphical comparison between each algorithm's result
+
 
