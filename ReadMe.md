@@ -1,4 +1,4 @@
-# ML LinearRegression InceptTerm
+# ML LinearRegression Intercept Term
 
 Linear regression model with hyp under intercept form.
 
