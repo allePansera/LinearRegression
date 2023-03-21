@@ -2,7 +2,7 @@ from HypothesisFunc.function import hyp
 from ErrorFunc.function import error
 import numpy as np
 
-def createMiniBatch(X, batch_size):
+def createMiniBatch(X, Y, batch_size):
     """
 
     :param X: Features Matrix or Label
@@ -14,7 +14,7 @@ def createMiniBatch(X, batch_size):
     # extract 'batch_size'th element from permutation
     mini_batch_indexes = perm[:batch_size]
     # the following instruction extract only specific row from X matrix
-    return X[mini_batch_indexes]
+    return X[mini_batch_indexes], Y[mini_batch_indexes]
 
 def expectedParameter(X, Y, alpha, batch_size, max_iterations=10000, best_solution=0.0001):
     """
@@ -30,7 +30,7 @@ def expectedParameter(X, Y, alpha, batch_size, max_iterations=10000, best_soluti
     # getting X matrix dimension
     n, d = X.shape
     # generating the first mini match -> each time i re-calculate it
-    x_mini_batch, y_mini_batch = createMiniBatch(X, batch_size), createMiniBatch(Y, batch_size)
+    x_mini_batch, y_mini_batch = createMiniBatch(X, Y, batch_size)
     # theta has a random values
     theta = np.random.randn(d)
     current_error, prev_error = error(x_mini_batch, y_mini_batch, theta), 0
@@ -50,7 +50,7 @@ def expectedParameter(X, Y, alpha, batch_size, max_iterations=10000, best_soluti
             prev_error = current_error
             current_error = error(x_mini_batch, y_mini_batch, theta)
             # re-evaluating the mini batch
-            x_mini_batch, y_mini_batch = createMiniBatch(X, batch_size), createMiniBatch(Y, batch_size)
+            x_mini_batch, y_mini_batch = createMiniBatch(X, Y, batch_size)
 
     return theta, iterationNumber, np.abs(current_error-prev_error)
 
