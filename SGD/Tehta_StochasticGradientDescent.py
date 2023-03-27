@@ -1,5 +1,5 @@
 from HypothesisFunc.function import hyp
-from ErrorFunc.function import error
+from ErrorFunc.function import error, error_V2
 import numpy as np
 
 def createMiniBatch(X, Y, batch_size):
@@ -33,7 +33,7 @@ def expectedParameter(X, Y, alpha, batch_size, max_iterations=10000, best_soluti
     x_mini_batch, y_mini_batch = createMiniBatch(X, Y, batch_size)
     # theta has a random values
     theta = np.random.randn(d)
-    current_error, prev_error = error(x_mini_batch, y_mini_batch, theta), 0
+    current_error, prev_error = error_V2(x_mini_batch, y_mini_batch, theta), 0
 
     for iterationNumber in range(max_iterations):
 
@@ -48,7 +48,7 @@ def expectedParameter(X, Y, alpha, batch_size, max_iterations=10000, best_soluti
             theta += (alpha * gradient)
             # evaluate again loss function
             prev_error = current_error
-            current_error = error(x_mini_batch, y_mini_batch, theta)
+            current_error = error_V2(x_mini_batch, y_mini_batch, theta)
             # re-evaluating the mini batch
             x_mini_batch, y_mini_batch = createMiniBatch(X, Y, batch_size)
 
